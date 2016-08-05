@@ -7,21 +7,25 @@ import sys
 
 MAX_HISTORY_LENGTH = 6
 
-UNHANDLED     = 100
+UNHANDLED = 100
 ACCESS_DENIED = 200
+
 
 class UnhandleQuery(Fault):
     def __init__(self, message="Couldn't handle the query"):
         Fault.__init__(self, UNHANDLED, message)
 
+
 class AccessDenied(Fault):
     def __init__(self, message="Acces denied"):
         Fault.__init__(self, ACCESS_DENIED, message)
+
 
 def inside(dir, name):
     dir = abspath(dir)
     name = abspath(name)
     return name.startswith(join(dir, ''))
+
 
 def getPort(url):
     '在URL中提取端口'
@@ -29,10 +33,12 @@ def getPort(url):
     parts = name.split(':')
     return int(parts[-1])
 
+
 class Node:
     """
     P2P网络中的节点。
     """
+
     def __init__(self, url, dirname, secret):
         self.url = url
         self.dirname = dirname
@@ -103,15 +109,19 @@ class Node:
                 return s.query(query, history)
 
             except Fault as f:
-                if f.faultCode == UNHANDLED: pass
-                else: self.known.remove(other)
+                if f.faultCode == UNHANDLED:
+                    pass
+                else:
+                    self.known.remove(other)
             except:
                 self.known.remove(other)
         raise UnhandleQuery
+
 
 def main():
     url, directory, secret = sys.argv[1:]
     n = Node(url, directory, secret)
     n._start()
+
 
 if __name__ == '__main__': main()

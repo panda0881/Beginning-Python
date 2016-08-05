@@ -8,8 +8,9 @@ from time import sleep
 from xmlrpc.client import ServerProxy, Fault
 import sys
 
-HEAD_START = 0.1 # Seconds
+HEAD_START = 0.1  # Seconds
 SECRET_LENGTH = 100
+
 
 def randomString(length):
     chars = []
@@ -18,6 +19,7 @@ def randomString(length):
         length -= 1
         chars.append(choice(letters))
     return ''.join(chars)
+
 
 class Client(Cmd):
     prompt = '> '
@@ -50,9 +52,11 @@ class Client(Cmd):
 
     do_EOF = do_exit
 
+
 def main():
     urlfile, directory, url = sys.argv[1:]
     client = Client(url, directory, urlfile)
     client.cmdloop()
+
 
 if __name__ == '__main__': main()
