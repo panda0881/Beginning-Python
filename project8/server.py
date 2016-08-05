@@ -47,6 +47,7 @@ class Node:
         try:
             content = self._handle(query)
         except:
+
             history = history + [self.url]
             print('in funciton query, history : %s' % history)
             if len(history) >= MAX_HISTORY_LENGTH: raise
