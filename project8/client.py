@@ -2,7 +2,7 @@ from cmd import Cmd
 from os import path
 from random import choice
 from string import ascii_lowercase
-from server import Node, UNHANDLED
+from project8.server import Node, UNHANDLED
 from threading import Thread
 from time import sleep
 from xmlrpc.client import ServerProxy, Fault
